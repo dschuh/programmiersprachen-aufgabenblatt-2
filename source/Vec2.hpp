@@ -1,11 +1,15 @@
 # ifndef VEC2_HPP
 # define VEC2_HPP
-// Vec2 class definition
+// Includeguards verhindern doppeltes Einbinden
 struct Vec2
 {
     //Constructors
     Vec2(float x, float y);
     Vec2();
+    /*
+    Destruktor muss implementiert werden, wenn explizit/manuell [Speicher|Netzwerkressourcen|Dateien] 
+    vom Betriebssystem angefordert werden
+    */
     
     float x_;
     float y_;
