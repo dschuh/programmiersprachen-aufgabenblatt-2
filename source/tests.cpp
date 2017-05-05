@@ -179,30 +179,85 @@ TEST_CASE("testing operator *", "[operator *]")
   REQUIRE(m3.a22_==50.0f);
 }
 
+TEST_CASE("testing operator * for matrix*vector", "[operator *]")
+{
+  Mat2 m1{1.0f, 2.0f, 
+          3.0f, 4.0f};
+  Mat2 m2{5.0f, 6.0f,
+          7.0f, 8.0f};
+  Vec2 v1{3.0f, 5.0f};
+  Vec2 v2{7.0f, 9.0f};
+  Vec2 v3{};
+  v3 = m1 * v1;
+  REQUIRE(v3.x_==13.0f);
+  REQUIRE(v3.y_==29.0f);
+  v3 = m2 * v2;
+  REQUIRE(v3.x_==89.0f);
+  REQUIRE(v3.y_==121.0f);
+}
 
+TEST_CASE("testing operator * for vector*matrix", "[operator *]")
+{
+  Mat2 m1{1.0f, 2.0f, 
+          3.0f, 4.0f};
+  Mat2 m2{5.0f, 6.0f,
+          7.0f, 8.0f};
+  Vec2 v1{3.0f, 5.0f};
+  Vec2 v2{7.0f, 9.0f};
+  Vec2 v3{};
+  v3 = v1*m1;
+  REQUIRE(v3.x_==12.0f);
+  REQUIRE(v3.y_==30.0f);
+  v3 = v2*m2;
+  REQUIRE(v3.x_==84.0f);
+  REQUIRE(v3.y_==126.0f);
+}
 
+TEST_CASE("testing inverse matrix", "[inverse]")
+{
+  Mat2 m1{1.0f, 2.0f, 
+          3.0f, 4.0f};
+  Mat2 m2{5.0f, 6.0f,
+          7.0f, 8.0f};
+  Mat2 inv=inverse(m1);
+  Mat2 inv2=inverse(m2);
+  REQUIRE(inv.a11_==-2.0f);
+  REQUIRE(inv.a12_==1.0f);
+  REQUIRE(inv.a21_==1.5f);
+  REQUIRE(inv.a22_==-0.5f);
+  REQUIRE(inv2.a11_==-4.0f);
+  REQUIRE(inv2.a12_==3.0f);
+  REQUIRE(inv2.a21_==3.5f);
+  REQUIRE(inv2.a22_==-2.5f);
+}
 
+TEST_CASE("testing transpose matrix", "[transpose]")
+{
+  Mat2 m1{1.0f, 2.0f, 
+          3.0f, 4.0f};
+  Mat2 m2{5.0f, 6.0f,
+          7.0f, 8.0f};
+  Mat2 trn=transpose(m1);
+  Mat2 trn2=transpose(m2);
+  REQUIRE(trn.a11_==1.0f);
+  REQUIRE(trn.a12_==3.0f);
+  REQUIRE(trn.a21_==2.0f);
+  REQUIRE(trn.a22_==4.0f);
+  REQUIRE(trn2.a11_==5.0f);
+  REQUIRE(trn2.a12_==7.0f);
+  REQUIRE(trn2.a21_==6.0f);
+  REQUIRE(trn2.a22_==8.0f);
+}
 
-
-
-
+TEST_CASE ("testing rotation matrix", "[make_rotation_mat2]")
+{
+  Mat2 rot = make_rotation_mat2(30);
+  REQUIRE (rot.a11_ == Approx(0.15425f));
+  REQUIRE (rot.a12_ == Approx(0.98803f));
+  REQUIRE (rot.a21_ == Approx(-0.98803f));
+  REQUIRE (rot.a22_ == Approx(0.15425f));
+}
 //  REQUIRE(==);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
