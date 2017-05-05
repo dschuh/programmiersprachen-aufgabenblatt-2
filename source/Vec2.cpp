@@ -8,13 +8,13 @@ Vec2::Vec2():
 Vec2::Vec2(float x, float y):
   x_(x), y_(y){}
 
-Vec2& Vec2::operator += ( Vec2 const & v ){
-  this->x_ += v.x_;
+Vec2& Vec2::operator += (Vec2 const& v){
+    this->x_ += v.x_;
 	this->y_ += v.y_;
 	return *this; 
 }
 
-Vec2& Vec2::operator -= (Vec2 const & v){
+Vec2& Vec2::operator -= (Vec2 const& v){
 	this->x_ -= v.x_;
 	this->y_ -= v.y_;
 	return *this;
@@ -59,6 +59,10 @@ Vec2 operator *( Vec2 const & v , float s ){
 
 Vec2 operator /( Vec2 const & v , float s ){
     Vec2 result{};
+    if(s==0){
+        std::cout << "Sie versuchen gerade durch 0 zu teilen! :("<<std::endl;
+        return v;
+    }
     result.x_ = v.x_ / s;
     result.y_ = v.y_ / s;
     return result;
