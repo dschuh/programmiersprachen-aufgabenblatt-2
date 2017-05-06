@@ -376,6 +376,13 @@ TEST_CASE ("testing color getter", "[getColor_]")
 }
 
 
+TEST_CASE ("testing circumference method", "[circumference]")
+{
+  Rectangle r{{2.0f, 5.0f}, {3.0f, 7.0f}};
+  REQUIRE (r.circumference()== 6.0f);
+  Rectangle r2{{0.0f, 0.0f}, {0.0f, 0.0f}};
+  REQUIRE (r2.circumference()==0.0f);
+}
 
 
 

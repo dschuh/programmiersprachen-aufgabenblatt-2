@@ -13,7 +13,7 @@ public:
 	Vec2 getMin_() const;
 	Vec2 getMax_() const;
 	Color getColor_() const;
-
+    float circumference() const;
 
 private:
     Vec2 min_;

@@ -30,5 +30,8 @@ Color Rectangle::getColor_() const{
     return color_;
 }
 
+float Rectangle::circumference() const{
+    return (2*(getMax_().x_-getMin_().x_))+(2*(getMax_().y_-getMin_().y_));
+}
 
 
