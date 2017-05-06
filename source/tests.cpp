@@ -2,6 +2,9 @@
 #include <catch.hpp>
 #include "Vec2.hpp"
 #include "mat2.hpp"
+#include "circle.hpp"
+#include "rectangle.hpp"
+#include "color.hpp"
 
 TEST_CASE("default konstruktor initialisiert x und y mit 0.0f","[constructor]")
 {
@@ -257,10 +260,137 @@ TEST_CASE ("testing rotation matrix", "[make_rotation_mat2]")
   REQUIRE (rot.a21_ == Approx(-0.98803f));
   REQUIRE (rot.a22_ == Approx(0.15425f));
 }
-//  REQUIRE(==);
+
+TEST_CASE ("testing default circle constructor", "[circle constructor]")
+{
+  Circle c{};
+  REQUIRE (c.getCenter().x_ == 0.0f);
+  REQUIRE (c.getCenter().y_ == 0.0f);
+  REQUIRE (c.getRadius() == 1.0f);
+  REQUIRE (c.getColor().r_ == 0.0f);
+  REQUIRE (c.getColor().g_ == 0.0f);
+  REQUIRE (c.getColor().b_ == 0.0f);
+}
+
+TEST_CASE ("testing circle constructor with user input", "[circle constructor]")
+{
+  Circle c{{2.0f, 5.0f}, 10.0f};
+  REQUIRE (c.getCenter().x_ == 2.0f);
+  REQUIRE (c.getCenter().y_ == 5.0f);
+  REQUIRE (c.getRadius() == 10.0f);
+  REQUIRE (c.getColor().r_ == 0.0f);
+  REQUIRE (c.getColor().g_ == 0.0f);
+  REQUIRE (c.getColor().b_ == 0.0f);}
+
+TEST_CASE ("testing circle constructor with user input including color", "[circle constructor]")
+{
+  Circle c{{2.0f, 5.0f}, 10.0f, 0.7f};
+  REQUIRE (c.getCenter().x_ == 2.0f);
+  REQUIRE (c.getCenter().y_ == 5.0f);
+  REQUIRE (c.getRadius() == 10.0f);
+  REQUIRE (c.getColor().r_ == 0.7f);
+  REQUIRE (c.getColor().g_ == 0.7f);
+  REQUIRE (c.getColor().b_ == 0.7f);}
+
+TEST_CASE ("testing center getter", "[getCenter]")
+{
+  Circle c{{2.0f, 5.0f}, 10.0f};
+  REQUIRE (c.getCenter().x_ == 2.0f);
+  REQUIRE (c.getCenter().y_ == 5.0f );
+}
+
+TEST_CASE ("testing radius getter", "[getRadius]")
+{
+  Circle c{{2.0f, 5.0f}, 10.0f};
+  REQUIRE (c.getRadius() == 10.0f);
+}
+
+TEST_CASE ("testing circumference function", "[circumference]")
+{
+  Circle c{{2.0f, 5.0f}, 10.0f};
+  Circle c2{{2.0f, 5.0f}, 0.0f};
+  REQUIRE (Approx(c.circumference()) == 62.8318f);
+  REQUIRE (c2.circumference() == 0.0f);
+}
+
+TEST_CASE ("testing default rectangle constructors", "[default rectangle constructor]")
+{
+  Rectangle r{};
+  REQUIRE (r.getMin_().x_ ==0.0f);
+  REQUIRE (r.getMin_().y_ ==0.0f);
+  REQUIRE (r.getMax_().x_ ==0.0f);
+  REQUIRE (r.getMax_().y_ ==0.0f);
+  REQUIRE (r.getColor_().r_ ==0.0f);
+  REQUIRE (r.getColor_().g_ ==0.0f);
+  REQUIRE (r.getColor_().b_ ==0.0f);
+}
+
+TEST_CASE ("testing rectangle user input constructors", "[rectangle user input constructor]")
+{
+  Rectangle r{{2.0f, 5.0f}, {3.0f, 6.0f}};
+  REQUIRE (r.getMin_().x_ ==2.0f);
+  REQUIRE (r.getMin_().y_ ==5.0f);
+  REQUIRE (r.getMax_().x_ ==3.0f);
+  REQUIRE (r.getMax_().y_ ==6.0f);
+  REQUIRE (r.getColor_().r_ ==0.0f);
+  REQUIRE (r.getColor_().g_ ==0.0f);
+  REQUIRE (r.getColor_().b_ ==0.0f);
+}
+
+TEST_CASE ("testing user defined rectangle constructors", "[rectangle constructor /w user input]")
+{
+  Rectangle r{{2.0f, 5.0f},{3.0f, 6.0f},{0.5f, 0.7f, 0.9f}};
+  REQUIRE (r.getMin_().x_ ==2.0f);
+  REQUIRE (r.getMin_().y_ ==5.0f);
+  REQUIRE (r.getMax_().x_ ==3.0f);
+  REQUIRE (r.getMax_().y_ ==6.0f);
+  REQUIRE (r.getColor_().r_ ==0.5f);
+  REQUIRE (r.getColor_().g_ ==0.7f);
+  REQUIRE (r.getColor_().b_ ==0.9f);
+}
+
+TEST_CASE ("testing min getter", "[getMin_]")
+{
+  Rectangle r{{2.0f, 5.0f}, {3.0f, 7.0f}};
+  REQUIRE (r.getMin_().x_ == 2.0f);
+  REQUIRE (r.getMin_().y_ == 5.0f );
+}
+
+TEST_CASE ("testing max getter", "[getMax_]")
+{
+  Rectangle r{{2.0f, 5.0f}, {3.0f, 7.0f}};
+  REQUIRE (r.getMax_().x_ == 3.0f);
+  REQUIRE (r.getMax_().y_ == 7.0f);
+}
+
+TEST_CASE ("testing color getter", "[getColor_]")
+{
+  Rectangle r{{2.0f, 5.0f}, {3.0f, 7.0f}};
+  Rectangle r2{{2.0f, 5.0f},{3.0f, 6.0f},{0.5f, 0.7f, 0.9f}};
+  REQUIRE (r.getColor_().r_== 0.0f);
+  REQUIRE (r.getColor_().g_== 0.0f);
+  REQUIRE (r.getColor_().b_== 0.0f);
+  REQUIRE (r2.getColor_().r_== 0.5f);
+  REQUIRE (r2.getColor_().g_== 0.7f);
+  REQUIRE (r2.getColor_().b_== 0.9f);
+}
 
 
 
+
+
+
+/*
+
+TEST_CASE ("", "[]")
+{
+  
+  REQUIRE ( == );
+  REQUIRE ( == );
+  REQUIRE ( == );
+  REQUIRE ( == );
+}
+*/
 
 int main(int argc, char *argv[])
 {

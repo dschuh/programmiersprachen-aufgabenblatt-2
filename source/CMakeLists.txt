@@ -1,5 +1,8 @@
 # Build example
 add_executable(example
+  circle.cpp
+  rectangle.cpp
+  color.cpp
   mat2.cpp
   Vec2.cpp
   window.cpp
@@ -14,6 +17,9 @@ add_dependencies(example glfw nanovg ${COPY_BINARY})
 
 # Build tests
 add_executable(tests
+  circle.cpp
+  rectangle.cpp
+  color.cpp
   mat2.cpp
   Vec2.cpp
   tests.cpp)
