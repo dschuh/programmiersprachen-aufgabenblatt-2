@@ -5,6 +5,7 @@
 #include "circle.hpp"
 #include "rectangle.hpp"
 #include "color.hpp"
+#include "window.hpp"
 
 TEST_CASE("default konstruktor initialisiert x und y mit 0.0f","[constructor]")
 {
@@ -384,7 +385,25 @@ TEST_CASE ("testing circumference method", "[circumference]")
   REQUIRE (r2.circumference()==0.0f);
 }
 
+TEST_CASE ("testing is inside rect function", "[isInsideRect]")
+{
+  Rectangle r{{5.0f, 5.0f}, {10.0f, 10.0f}};
+  Vec2 p{7.0f, 7.0f};
+  Rectangle r2{{5.0f, 5.0f}, {10.0f, 10.0f}};
+  Vec2 p2{2.0f, 2.0f};
+  REQUIRE (r.isInsideRect(p) == true);
+  REQUIRE (r2.isInsideRect(p2) == false);
+}
 
+TEST_CASE ("testing is inside circ function", "[isInsideCirc]")
+{
+  Circle c{{5.0f, 5.0f}, 10.0f};
+  Vec2 p{7.0f, 7.0f};
+  Circle c2{{5.0f, 5.0f}, 10.0f};
+  Vec2 p2{2.0f, 2.0f};
+  REQUIRE (c.isInsideCirc(p) == true);
+  REQUIRE (c2.isInsideCirc(p2) == false);
+}
 
 
 /*

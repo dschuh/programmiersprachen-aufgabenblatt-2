@@ -22,6 +22,8 @@ public:
     void draw(Window const& win)const;
     void draw(Window const& win, Color const& color)const;
 
+    bool isInsideRect(Vec2 const& p)const;
+
 
 private:
     Vec2 min_;

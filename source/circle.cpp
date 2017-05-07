@@ -2,7 +2,7 @@
 #include "circle.hpp"
 #include "Vec2.hpp"
 #include "color.hpp"
-#include "window.hpp"
+#include "mat2.hpp"
 
 Circle::Circle():
     center_(0.0f, 0.0f),
@@ -35,23 +35,43 @@ Color Circle::getColor() const {
 float Circle::circumference() const {
 	return M_PI*radius_*2;
 }
-/*
-void Circle::draw(Window& w){
-//	for(float i = 0.0; i<= 2* M_PI; i += 0.01){
-//		w.draw_point(r/100*cos(i)+0.5, r/100*sin(i)+0.5, col.r_, col.g_, col.b_);
-//	}
-    for (int i = 1; i<= 360; ++i)
-	    {
-       		Vec2 v1{ (make_rotation_mat2(2*M_PI*i/360)) * Vec2(getRadius(), 0) + getCenter() };
-        	Vec2 v2{ (make_rotation_mat2((2*M_PI*(i+1))/360)) * Vec2(get_radius(), 0) + get_ctr() };
-        	win.draw_line(v1.x_, v1.y_, v2.x_, v2.y_, color_.r_, color_.g_, color_.b_);
-		}	
+
+void Circle::draw(Window const& w){
+	Vec2 rad1{radius_, 0.0f};
+	Vec2 rad2{rad1}; 
+	Mat2 m = make_rotation_mat2(M_PI/180);
+    for (float i = 1; i<=360; i++){
+        rad1 += center_;
+        rad2 = m*rad2;
+        rad2 += center_;
+        w.draw_line(rad1.x_,rad1.y_,rad2.x_,rad2.y_,color_.r_,color_.g_,color_.b_);
+        rad2 -= center_;
+        rad1 = rad2;
+    }	
 }
 
 
-void Circle::draw(Window& w, Color col){
-	for(float i = 0.0; i<= 2* M_PI; i += 0.01){
-		w.draw_point(r/100*cos(i)+ctr.x, r/100*sin(i)+ctr.y, col.r_, col.g_, col.b_);
-	}
+void Circle::draw(Window const& w, Color const& color){
+	Vec2 rad1{radius_, 0.0f};
+	Vec2 rad2{rad1}; 
+	Mat2 m = make_rotation_mat2(M_PI/180);
+    for (float i = 1; i<=360; i++){
+        rad1 += center_;
+        rad2 = m*rad2;
+        rad2 += center_;
+        w.draw_line(rad1.x_,rad1.y_,rad2.x_,rad2.y_,color.r_,color.g_,color.b_);
+        rad2 -= center_;
+        rad1 = rad2;
+    }	
 }
-*/
+
+bool Circle::isInsideCirc (Vec2 const& p)const{
+	float xcenter=getCenter().x_;
+	float ycenter=getCenter().y_;
+	float rad=getRadius();
+	float a = p.x_-xcenter;
+	float b = p.y_-ycenter;
+	if(sqrt(pow(a, 2)+pow(b, 2))<rad){
+		return true;
+	}else return false;
+} 

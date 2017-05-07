@@ -26,7 +26,25 @@ add_executable(tests
   Vec2.cpp
   tests.cpp)
 target_link_libraries(tests
-  ${GLFW_LIBRARIES}
   glfw
+  ${GLFW_LIBRARIES}
   nanovg
   ${OPENGL_LIBRARIES})
+
+# Build clock
+add_executable(clock
+  window.cpp
+  glew.c
+  clock.cpp
+  Vec2.cpp
+  mat2.cpp
+  color.cpp
+  circle.cpp
+  )
+target_link_libraries(clock
+  glfw
+  ${GLFW_LIBRARIES}
+  nanovg
+  ${OPENGL_LIBRARIES})
+add_dependencies(clock glfw nanovg ${COPY_BINARY})
+
