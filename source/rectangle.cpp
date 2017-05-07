@@ -5,7 +5,7 @@
 
 
 /*
-Unterschied Methode und Funktion:
+Unterschied Methode und Funktion: Beides Funktionen, jedoch ist eine Methode eine Memberfunktion einer Klasse
 Circumference als const?: Ja, da Memberfunktion und verändert Rectangle- bzw Circleobjekte nicht
 */
 

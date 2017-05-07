@@ -1,9 +1,9 @@
 #ifndef COLOR_HPP
 #define COLOR_HPP
 
-//Im unterschied zur Klasse sind beim struct alle 
+//Im Unterschied zur Klasse sind beim struct alle 
 //Membervariablen und -funktionen per default public
-//DTO:
+//DTO: Software"schnittstelle", welche Daten in einem Objekt buendelt
 
 struct Color{
 

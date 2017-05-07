@@ -8,7 +8,7 @@ struct Vec2
     Vec2();
     /*
     Destruktor muss implementiert werden, wenn explizit/manuell [Speicher|Netzwerkressourcen|Dateien] 
-    vom Betriebssystem angefordert werden
+    vom Betriebssystem angefordert werden, hier nicht
     */
     
     float x_;
