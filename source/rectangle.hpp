@@ -1,9 +1,11 @@
 #ifndef RECTANGLE_HPP
 #define RECTANGLE_HPP
+
 #include "Vec2.hpp"
 #include "color.hpp"
 #include "window.hpp"
-
+#include <cmath>
+#include <cstdlib>
 
 class Rectangle{
 
@@ -17,14 +19,14 @@ public:
 	Color getColor_() const;
     float circumference() const;
 
-    void draw(Window const& win) const;
+    void draw(Window const& win)const;
+    void draw(Window const& win, Color const& color)const;
 
 
 private:
     Vec2 min_;
     Vec2 max_;
 	Color color_;
-
 };
 
 #endif

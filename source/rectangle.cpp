@@ -40,9 +40,16 @@ float Rectangle::circumference() const{
     return (2*(getMax_().x_-getMin_().x_))+(2*(getMax_().y_-getMin_().y_));
 }
 
-void Rectangle::draw(Window const& win) const{
+void Rectangle::draw(Window const& win)const{
 	win.draw_line(min_.x_, min_.y_, min_.x_, max_.y_, color_.r_, color_.g_, color_.b_);
     win.draw_line(min_.x_, min_.y_, max_.x_, min_.y_, color_.r_, color_.g_, color_.b_);
     win.draw_line(max_.x_, min_.y_, max_.x_, max_.y_, color_.r_, color_.g_, color_.b_);
 	win.draw_line(min_.x_, max_.y_, max_.x_, max_.y_, color_.r_, color_.g_, color_.b_);
+}
+
+void Rectangle::draw(Window const& win, Color const& color)const{
+	win.draw_line(min_.x_, min_.y_, min_.x_, max_.y_, color.r_, color.g_, color.b_);
+    win.draw_line(min_.x_, min_.y_, max_.x_, min_.y_, color.r_, color.g_, color.b_);
+    win.draw_line(max_.x_, min_.y_, max_.x_, max_.y_, color.r_, color.g_, color.b_);
+	win.draw_line(min_.x_, max_.y_, max_.x_, max_.y_, color.r_, color.g_, color.b_);
 }
